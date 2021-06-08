@@ -2,17 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
-//import '../../lib/progress_dialog.dart';
-
 ProgressDialog pr;
 
 void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
+  runApp(MaterialApp(home: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   double percentage = 0.0;
 
   @override
@@ -52,15 +53,16 @@ class MyApp extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: RaisedButton(
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.blue,
+            ),
             child: Text(
               'Show Dialog',
               style: TextStyle(color: Colors.white),
             ),
-            color: Colors.blue,
             onPressed: () async {
               await pr.show();
-
               Future.delayed(Duration(seconds: 2)).then((onvalue) {
                 percentage = percentage + 30.0;
                 print(percentage);
@@ -131,10 +133,12 @@ class _FirstScreenState extends State<FirstScreen> {
 
     return Scaffold(
       body: Center(
-        child: RaisedButton(
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.blueAccent,
+          ),
           child: Text('Show dialog and go to next screen',
               style: TextStyle(color: Colors.white)),
-          color: Colors.blueAccent,
           onPressed: () {
             pr.show();
             Future.delayed(Duration(seconds: 3)).then((value) {
